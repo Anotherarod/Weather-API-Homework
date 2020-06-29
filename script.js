@@ -56,7 +56,7 @@ function renderPage() {
                   console.log(response);
 
                   var forecastElements = document.querySelectorAll(".forecast");
-                  for (i=0; i<forecastEls.length; i++) {
+                  for (i=0; i<forecastElements.length; i++) {
                         forecastElements[i].innerHTML = "";
                       
                       var forecastIndex = i*8 + 4;
@@ -77,16 +77,26 @@ function renderPage() {
                       
                       var forecastTempElement = document.createElement("p");
                       forecastTempElement.innerHTML = "Temp: " + k2f(response.data.list[forecastIndex].main.temp) + " &#176F";
-                      forecastElements[i].append(forecastTempEl);
+                      forecastElements[i].append(forecastTempElement);
                       
                       var forecastHumidityElement = document.createElement("p");
                       forecastHumidityElement.innerHTML = "Humidity: " + response.data.list[forecastIndex].main.humidity + "%";
-                      forecastElements[i].append(forecastHumidityEl);
+                      forecastElements[i].append(forecastHumidityElement);
                       }
                   })
               });  
           }
 
-      
- 
-  
+          searchElement.addEventListener("click",function() {
+            var searchTerm = inputElement.value;
+            getWeather(searchTerm);
+            searchHistory.push(searchTerm);
+            localStorage.setItem("search",JSON.stringify(searchHistory));
+            renderSearchHistory();
+        })
+
+        clearElement.addEventListener("click",function() {
+            searchHistory = [];
+            renderSearchHistory();
+        })
+    
