@@ -11,10 +11,16 @@ function renderPage() {
     var historyElement = document.getElementById("history");
     var searchHistory = JSON.parse(localStorage.getItem("search")) || [];
     console.log(searchHistory);
-    
-  
-    var APIKey = "257dd9a9e57952ff496d8ab275bb751a";
 
+    $("#city-input").keypress(function(event) { 
+	
+        if (event.keyCode === 13) { 
+            event.preventDefault();
+            $("#search-button").click(); 
+        } 
+  
+     var APIKey = "257dd9a9e57952ff496d8ab275bb751a";
+   
 
     function getWeather(cityName) {
   
@@ -29,7 +35,7 @@ function renderPage() {
                   var month = currentDate.getMonth() + 1;
                   var year = currentDate.getFullYear();
                   nameEl.innerHTML = response.data.name + " (" + month + "/" + day + "/" + year + ") ";
-                  let weatherPic = response.data.weather[0].icon;
+                  var weatherPic = response.data.weather[0].icon;
                   currentPicEl.setAttribute("src","https://openweathermap.org/img/wn/" + weatherPic + "@2x.png");
                   currentPicEl.setAttribute("alt",response.data.weather[0].description);
                   tempElement.innerHTML = "Temperature: " + k2f(response.data.main.temp) + " &#176F";
@@ -47,7 +53,7 @@ function renderPage() {
                   uvIndexElement.innerHTML = "UV Index: ";
                   uvIndexElement.append(UVIndex);
               });
-
+              
               var cityID = response.data.id;
               var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&appid=" + APIKey;
               axios.get(forecastQueryURL)
@@ -100,3 +106,32 @@ function renderPage() {
             renderSearchHistory();
         })
     
+    function k2f(K) {
+        return Math.floor((K - 273.15) *1.8 +32);
+    }
+  
+    function renderSearchHistory() {
+        historyElement.innerHTML = "";
+        for (var i=0; i<searchHistory.length; i++) {
+            var historyItem = document.createElement("input");
+   
+            historyItem.setAttribute("type","text");
+            historyItem.setAttribute("readonly",true);
+            historyItem.setAttribute("class", "form-control d-block bg-white");
+            historyItem.setAttribute("value", searchHistory[i]);
+            historyItem.addEventListener("click",function() {
+                getWeather(historyItem.value);
+            })
+            historyElement.append(historyItem);
+        }
+    }
+  
+    renderSearchHistory();
+    if (searchHistory.length > 0) {
+        getWeather(searchHistory[searchHistory.length - 1]);
+    }
+  
+
+
+} 
+  renderPage();
