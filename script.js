@@ -106,7 +106,7 @@ function renderPage() {
 }
     clearHistory()
     
-    function k2f(K) {
+        function k2f(K) {
         return Math.floor((K - 273.15) *1.8 +32);
     }
   
