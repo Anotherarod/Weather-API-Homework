@@ -12,18 +12,14 @@ function renderPage() {
     var searchHistory = JSON.parse(localStorage.getItem("search")) || [];
     console.log(searchHistory);
 
-    $("#city-input").keypress(function(event) { 
-	
-        if (event.keyCode === 13) { 
-            event.preventDefault();
-            $("#search-button").click(); 
-        } 
+    
+  
   
      var APIKey = "257dd9a9e57952ff496d8ab275bb751a";
    
 
     function getWeather(cityName) {
-  
+
               var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey;
               axios.get(queryURL)
               .then(function(response){
@@ -105,6 +101,10 @@ function renderPage() {
             searchHistory = [];
             renderSearchHistory();
         })
+    function clearHistory(){
+    clearHistory = (localStorage.clear("clear-history"))
+}
+    clearHistory()
     
     function k2f(K) {
         return Math.floor((K - 273.15) *1.8 +32);
