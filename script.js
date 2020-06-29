@@ -66,6 +66,14 @@ function renderPage() {
                       var forecastYear = forecastDate.getFullYear();
                       var forecastDateEl = document.createElement("p");
                       
-                     
- 
+                      forecastDateEl.setAttribute("class","mt-3 mb-0 forecast-date");
+                      forecastDateEl.innerHTML = forecastMonth + "/" + forecastDay + "/" + forecastYear;
+                      forecastElements[i].append(forecastDateEl);
+                      
+                      var forecastWeatherEl = document.createElement("img");
+                      forecastWeatherEl.setAttribute("src","https://openweathermap.org/img/wn/" + response.data.list[forecastIndex].weather[0].icon + "@2x.png");
+                      forecastWeatherEl.setAttribute("alt",response.data.list[forecastIndex].weather[0].description);
+                      forecastElements[i].append(forecastWeatherEl);
+                      
+             
   
