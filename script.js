@@ -4,10 +4,10 @@ function renderPage() {
     var clearEl = document.getElementById("clear-history");
     var nameEl = document.getElementById("city-name");
     var currentPicEl = document.getElementById("current-pic");
-    var currentTempEl = document.getElementById("temperature");
-    var currentHumidityEl = document.getElementById("humidity");4
-    var currentWindEl = document.getElementById("wind-speed");
-    var currentUVEl = document.getElementById("UV-index");
+    var tempElement = document.getElementById("temperature");
+    var humidityElement = document.getElementById("humidity");4
+    var windElement = document.getElementById("wind-speed");
+    var uvIndexElement = document.getElementById("UV-index");
     var historyEl = document.getElementById("history");
     var searchHistory = JSON.parse(localStorage.getItem("search")) || [];
     console.log(searchHistory);
@@ -37,6 +37,7 @@ function renderPage() {
                   windElement.innerHTML = "Wind Speed: " + response.data.wind.speed + " MPH";
               var lat = response.data.coord.lat;
               var lon = response.data.coord.lon;
+              
               var UVQueryURL = "https://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&cnt=1";
               axios.get(UVQueryURL)
               .then(function(response){
@@ -46,12 +47,25 @@ function renderPage() {
                   uvIndexElement.innerHTML = "UV Index: ";
                   uvIndexElement.append(UVIndex);
               });
-        //  Using saved city name, execute a 5-day forecast get request from open weather map api
+
               var cityID = response.data.id;
               var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&appid=" + APIKey;
               axios.get(forecastQueryURL)
               .then(function(response){
-        //  Parse response to display forecast for next 5 days underneath current conditions
+
                   console.log(response);
+
+                  var forecastElements = document.querySelectorAll(".forecast");
+                  for (i=0; i<forecastEls.length; i++) {
+                        forecastElements[i].innerHTML = "";
+                      
+                      var forecastIndex = i*8 + 4;
+                      var forecastDate = new Date(response.data.list[forecastIndex].dt * 1000);
+                      var forecastDay = forecastDate.getDate();
+                      var forecastMonth = forecastDate.getMonth() + 1;
+                      var forecastYear = forecastDate.getFullYear();
+                      var forecastDateEl = document.createElement("p");
+                      
+                     
  
   
