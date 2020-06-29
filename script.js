@@ -1,14 +1,14 @@
 function renderPage() {
-    var inputEl = document.getElementById("city-input");
-    var searchEl = document.getElementById("search-button");
-    var clearEl = document.getElementById("clear-history");
+    var inputElement = document.getElementById("city-input");
+    var searchElement = document.getElementById("search-button");
+    var clearElement = document.getElementById("clear-history");
     var nameEl = document.getElementById("city-name");
     var currentPicEl = document.getElementById("current-pic");
     var tempElement = document.getElementById("temperature");
     var humidityElement = document.getElementById("humidity");4
     var windElement = document.getElementById("wind-speed");
     var uvIndexElement = document.getElementById("UV-index");
-    var historyEl = document.getElementById("history");
+    var historyElement = document.getElementById("history");
     var searchHistory = JSON.parse(localStorage.getItem("search")) || [];
     console.log(searchHistory);
     
@@ -70,10 +70,23 @@ function renderPage() {
                       forecastDateEl.innerHTML = forecastMonth + "/" + forecastDay + "/" + forecastYear;
                       forecastElements[i].append(forecastDateEl);
                       
-                      var forecastWeatherEl = document.createElement("img");
-                      forecastWeatherEl.setAttribute("src","https://openweathermap.org/img/wn/" + response.data.list[forecastIndex].weather[0].icon + "@2x.png");
-                      forecastWeatherEl.setAttribute("alt",response.data.list[forecastIndex].weather[0].description);
-                      forecastElements[i].append(forecastWeatherEl);
+                      var forecastWeatherElement = document.createElement("img");
+                      forecastWeatherElement.setAttribute("src","https://openweathermap.org/img/wn/" + response.data.list[forecastIndex].weather[0].icon + "@2x.png");
+                      forecastWeatherElement.setAttribute("alt",response.data.list[forecastIndex].weather[0].description);
+                      forecastElements[i].append(forecastWeatherElement);
                       
-             
+                      var forecastTempElement = document.createElement("p");
+                      forecastTempElement.innerHTML = "Temp: " + k2f(response.data.list[forecastIndex].main.temp) + " &#176F";
+                      forecastElements[i].append(forecastTempEl);
+                      
+                      var forecastHumidityElement = document.createElement("p");
+                      forecastHumidityElement.innerHTML = "Humidity: " + response.data.list[forecastIndex].main.humidity + "%";
+                      forecastElements[i].append(forecastHumidityEl);
+                      }
+                  })
+              });  
+          }
+
+      
+ 
   
