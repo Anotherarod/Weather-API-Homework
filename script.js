@@ -11,8 +11,8 @@ function renderPage() {
     var historyElement = document.getElementById("history");
     var searchHistory = JSON.parse(localStorage.getItem("search")) || [];
     console.log(searchHistory);
-
-  
+       
+ 
      var APIKey = "257dd9a9e57952ff496d8ab275bb751a";
    
 
@@ -94,7 +94,19 @@ function renderPage() {
             localStorage.setItem("search",JSON.stringify(searchHistory));
             renderSearchHistory();
         })
+        inputElement.addEventListener("keydown",function(event){
+            if (event.which === 13){
+                
 
+          
+            var searchTerm = inputElement.value;
+            getWeather(searchTerm);
+            searchHistory.push(searchTerm);
+            localStorage.setItem("search",JSON.stringify(searchHistory));
+            renderSearchHistory();
+        }
+        });
+  
         clearElement.addEventListener("click",function() {
             searchHistory = [];
             renderSearchHistory();
