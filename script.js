@@ -5,15 +5,13 @@ function renderPage() {
     var nameEl = document.getElementById("city-name");
     var currentPicEl = document.getElementById("current-pic");
     var tempElement = document.getElementById("temperature");
-    var humidityElement = document.getElementById("humidity");4
+    var humidityElement = document.getElementById("humidity");
     var windElement = document.getElementById("wind-speed");
     var uvIndexElement = document.getElementById("UV-index");
     var historyElement = document.getElementById("history");
     var searchHistory = JSON.parse(localStorage.getItem("search")) || [];
     console.log(searchHistory);
 
-    
-  
   
      var APIKey = "257dd9a9e57952ff496d8ab275bb751a";
    
