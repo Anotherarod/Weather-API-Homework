@@ -24,7 +24,7 @@ function renderPage() {
             .then(function (action) {
                 console.log(action);
 
-                var currentDate = new Date(response.data.dt * 1000);
+                var currentDate = new Date(action.data.dt * 1000);
                 console.log(currentDate);
                 var day = currentDate.getDate();
                 var month = currentDate.getMonth() + 1;
