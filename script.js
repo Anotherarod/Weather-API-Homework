@@ -32,7 +32,7 @@ function renderPage() {
                 nameEl.innerHTML = action.data.name + " (" + month + "/" + day + "/" + year + ") ";
                 var weatherPic = action.data.weather[0].icon;
                 currentPicEl.setAttribute("src", "https://openweathermap.org/img/wn/" + weatherPic + "@2x.png");
-                currentPicEl.setAttribute("alt", response.data.weather[0].description);
+                currentPicEl.setAttribute("alt", action.data.weather[0].description);
                 tempElement.innerHTML = "Temperature: " + k2f(action.data.main.temp) + " &#176F";
                 humidityElement.innerHTML = "Humidity: " + action.data.main.humidity + "%";
                 windElement.innerHTML = "Wind Speed: " + action.data.wind.speed + " MPH";
@@ -49,7 +49,7 @@ function renderPage() {
                         uvIndexElement.append(UVIndex);
                     });
 
-                var cityID = response.data.id;
+                var cityID = action.data.id;
                 var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&appid=" + APIKey;
                 axios.get(forecastQueryURL)
                     .then(function (action) {
@@ -72,7 +72,7 @@ function renderPage() {
                             forecastElements[i].append(forecastDateEl);
 
                             var forecastWeatherElement = document.createElement("img");
-                            forecastWeatherElement.setAttribute("src", "https://openweathermap.org/img/wn/" + response.data.list[forecastIndex].weather[0].icon + "@2x.png");
+                            forecastWeatherElement.setAttribute("src", "https://openweathermap.org/img/wn/" + action.data.list[forecastIndex].weather[0].icon + "@2x.png");
                             forecastWeatherElement.setAttribute("alt", action.data.list[forecastIndex].weather[0].description);
                             forecastElements[i].append(forecastWeatherElement);
 
