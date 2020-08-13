@@ -1,7 +1,7 @@
 # Weather-API-Homework
 
 
-https://anotherarod.github.io/Weather-API-Homework/
+https://anotherarod.github.io/Weather-Dashboard-API/
 
 
 
@@ -67,7 +67,7 @@ As part of this I used a "keydown" function to acknowledge when the user presses
 
 Lines 120-121: I made a function to convert kelvin to fahrenheit and used math.floor method to make sure the populated temp would be without decimals and rounded down to the nearest integer.
 
-Line 124: Lastly I created a render search history function to keep users past city forecast choices in the history coloumn under the search bar.
+Line 124: Lastly I created a render search history function to keep users past city forecast choices in the history column under the search bar.
 
 
 
